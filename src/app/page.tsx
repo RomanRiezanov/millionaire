@@ -22,8 +22,8 @@ export default function StartPage() {
     <main className={styles.page}>
       <div className={styles.imageSection}>
         <Image
-          src="/thumb.png"
-          alt=""
+          src="/hand.webp"
+          alt="hand"
           width={560}
           height={560}
           className={styles.thumb}
@@ -31,7 +31,9 @@ export default function StartPage() {
         />
       </div>
       <div className={styles.content}>
-        <h1 className={styles.title}>Who wants to be a millionaire?</h1>
+        <h1 className={styles.title}>
+          Who wants to be <br />a millionaire?
+        </h1>
         <Button onClick={handleStart}>Start</Button>
       </div>
     </main>
