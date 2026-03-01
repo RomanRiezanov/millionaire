@@ -21,6 +21,7 @@ export default function GamePage() {
     {}
   );
   const [isRevealing, setIsRevealing] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     if (gameStatus === "idle") {
@@ -70,6 +71,27 @@ export default function GamePage() {
   return (
     <main className={styles.container}>
       <div className={styles.game}>
+        <div className={styles.mobileHeader}>
+          <button
+            type="button"
+            className={styles.burgerBtn}
+            onClick={() => setIsMenuOpen(true)}
+            aria-label="Open prize menu"
+          >
+            <svg
+              width="24"
+              height="18"
+              viewBox="0 0 24 18"
+              fill="none"
+              aria-hidden="true"
+            >
+              <rect width="24" height="2" rx="1" fill="#1C1C21" />
+              <rect y="8" width="24" height="2" rx="1" fill="#1C1C21" />
+              <rect y="16" width="24" height="2" rx="1" fill="#1C1C21" />
+            </svg>
+          </button>
+        </div>
+
         <div className={styles.questionArea}>
           <h2 className={styles.question}>{currentQuestion.question}</h2>
 
@@ -90,6 +112,33 @@ export default function GamePage() {
           <PrizeList currentIndex={currentQuestionIndex} />
         </div>
       </div>
+
+      {isMenuOpen && (
+        <div className={styles.modal}>
+          <button
+            type="button"
+            className={styles.closeBtn}
+            onClick={() => setIsMenuOpen(false)}
+            aria-label="Close prize menu"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M18 6L6 18M6 6L18 18"
+                stroke="#1C1C21"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+            </svg>
+          </button>
+          <PrizeList currentIndex={currentQuestionIndex} />
+        </div>
+      )}
     </main>
   );
 }

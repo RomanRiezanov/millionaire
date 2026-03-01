@@ -5,8 +5,34 @@
 
 .game {
   display: flex;
+  flex-direction: row;
   width: 100%;
   min-height: 100vh;
+
+  @include ifmobile {
+    flex-direction: column;
+  }
+}
+
+.mobileHeader {
+  display: none;
+
+  @include ifmobile {
+    display: flex;
+    justify-content: flex-end;
+    padding: 16px 20px;
+    background: $black-5;
+  }
+}
+
+.burgerBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
 }
 
 .questionArea {
@@ -15,8 +41,11 @@
   flex-direction: column;
   justify-content: space-between;
   padding: 132px 80px 122px;
-
   background: $black-5;
+
+  @include ifmobile {
+    padding: 32px 20px 48px;
+  }
 }
 
 .question {
@@ -24,14 +53,22 @@
   font-weight: 600;
   line-height: 116%;
   color: $black-100;
-
   max-width: 624px;
+
+  @include ifmobile {
+    font-size: 22px;
+  }
 }
 
 .answers {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 34px;
+  gap: 32px 34px;
+
+  @include ifmobile {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
 }
 
 .sidebar {
@@ -41,4 +78,38 @@
   justify-content: center;
   width: 376px;
   overflow: hidden;
+
+  @include ifmobile {
+    display: none;
+  }
+}
+
+// Mobile prize modal
+.modal {
+  display: none;
+
+  @include ifmobile {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: $black-5;
+    overflow: hidden;
+  }
+}
+
+.closeBtn {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
 }

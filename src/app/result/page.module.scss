@@ -1,28 +1,25 @@
 .page {
   display: flex;
-
   min-height: 100vh;
-
   background: $black-5;
 }
 
 .contentWrapper {
   display: flex;
-  gap: 32px;
-
-  position: relative;
-
-  box-sizing: border-box;
-
-  max-width: $bp-desktop;
+  flex-direction: row;
   width: 100%;
-
+  max-width: $main-container-width;
   margin: 0 auto;
+
+  @include ifmobile {
+    flex-direction: column;
+    align-items: center;
+    padding: 48px 24px;
+  }
 }
 
 .imageSection {
   flex: 1;
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -33,38 +30,55 @@
   height: auto;
   max-width: 560px;
   object-fit: contain;
+
+  @include ifmobile {
+    max-width: 320px;
+  }
 }
 
 .content {
   flex: 1;
-
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  gap: 64px;
+  gap: 40px;
+
+  @include ifmobile {
+    align-items: center;
+    width: 100%;
+  }
 }
 
 .scoreBlock {
   display: flex;
   flex-direction: column;
   gap: 8px;
+
+  @include ifmobile {
+    text-align: center;
+  }
 }
 
 .label {
   font-size: 32px;
   font-weight: 600;
   line-height: 116%;
-
   color: $black-100;
-
   opacity: 0.5;
+
+  @include ifmobile {
+    font-size: 20px;
+  }
 }
 
 .title {
   font-size: 56px;
   font-weight: 600;
   line-height: 116%;
-
   color: $black-100;
+
+  @include ifmobile {
+    font-size: 36px;
+  }
 }

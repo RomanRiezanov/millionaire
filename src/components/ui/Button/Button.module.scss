@@ -2,21 +2,21 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  max-width: 288px;
+  max-width: 296px;
   width: 100%;
-  padding: 16px 20px;
-  border-radius: 8px;
-  font-size: 14px;
+  padding: 20px;
+  border-radius: 12px;
+  font-size: 20px;
   font-weight: 600;
   line-height: 116%;
   cursor: pointer;
   transition: background-color $transition-base;
 
-  @include respond-to(tablet) {
-    max-width: 296px;
-    padding: 20px;
-    border-radius: 12px;
-    font-size: 20px;
+  @include ifmobile {
+    max-width: 288px;
+    padding: 16px 20px;
+    border-radius: 8px;
+    font-size: 14px;
   }
 }
 
