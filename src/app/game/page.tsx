@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 
 import AnswerOption from "@/components/shared/AnswerOption/AnswerOption";
 import PrizeList from "@/components/shared/PrizeList/PrizeList";
-import Question from "@/components/shared/Question/Question";
 import { AnswerState } from "@/constants/answerState";
 import { ROUTES } from "@/constants/routes";
 import useGame from "@/hooks/useGame";
@@ -14,13 +13,8 @@ import styles from "./page.module.scss";
 
 export default function GamePage() {
   const router = useRouter();
-  const {
-    currentQuestion,
-    currentQuestionIndex,
-    totalQuestions,
-    gameStatus,
-    answerQuestion,
-  } = useGame();
+  const { currentQuestion, currentQuestionIndex, gameStatus, answerQuestion } =
+    useGame();
 
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [answerStates, setAnswerStates] = useState<Record<string, AnswerState>>(
@@ -77,11 +71,8 @@ export default function GamePage() {
     <main className={styles.container}>
       <div className={styles.game}>
         <div className={styles.questionArea}>
-          <Question
-            text={currentQuestion.question}
-            number={currentQuestionIndex + 1}
-            total={totalQuestions}
-          />
+          <h2 className={styles.question}>{currentQuestion.question}</h2>
+
           <div className={styles.answers}>
             {currentQuestion.answers.map((answer) => (
               <AnswerOption
@@ -94,6 +85,7 @@ export default function GamePage() {
             ))}
           </div>
         </div>
+
         <div className={styles.sidebar}>
           <PrizeList currentIndex={currentQuestionIndex} />
         </div>

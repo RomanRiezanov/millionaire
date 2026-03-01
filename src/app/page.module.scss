@@ -6,6 +6,8 @@
   min-height: 100vh;
   background: $white-100;
 
+  margin: 0 auto;
+
   &::after {
     content: "";
     position: absolute;
@@ -16,14 +18,27 @@
   }
 }
 
-.imageSection {
+.contentWrapper {
+  display: flex;
+  gap: 32px;
+
   position: relative;
 
-  flex: 1;
+  box-sizing: border-box;
+
+  max-width: $bp-desktop;
+  width: 100%;
+
+  margin: 0 auto;
+}
+
+.imageSection {
+  position: relative;
 
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 32px;
 }
 
 .thumb {
@@ -37,7 +52,6 @@
   position: relative;
 
   z-index: 1;
-  flex: 1;
 
   display: flex;
   flex-direction: column;
