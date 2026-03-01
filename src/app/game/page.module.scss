@@ -1,0 +1,46 @@
+.container {
+  min-height: 100vh;
+  padding: $spacing-lg $spacing-md;
+
+  @include respond-to(tablet) {
+    padding: $spacing-xl $spacing-lg;
+  }
+}
+
+.game {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xl;
+
+  @include respond-to(desktop) {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: $spacing-2xl;
+  }
+}
+
+.questionArea {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+}
+
+.answers {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-md;
+
+  @include respond-to(tablet) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.sidebar {
+  @include respond-to(desktop) {
+    position: sticky;
+    top: $spacing-lg;
+  }
+}

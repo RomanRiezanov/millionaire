@@ -1,0 +1,44 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 288px;
+  width: 100%;
+  padding: 16px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 116%;
+  cursor: pointer;
+  transition: background-color $transition-base;
+
+  @include respond-to(tablet) {
+    max-width: 296px;
+    padding: 20px;
+    border-radius: 12px;
+    font-size: 20px;
+  }
+}
+
+.primary {
+  background-color: $orange-100;
+  color: $white-100;
+
+  &:hover:not(:disabled) {
+    background-color: $orange-80;
+  }
+
+  &:active:not(:disabled) {
+    background-color: $orange-120;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.fullWidth {
+  width: 100%;
+  max-width: 100%;
+}

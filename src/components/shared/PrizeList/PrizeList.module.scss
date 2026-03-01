@@ -1,0 +1,54 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 240px;
+  height: 40px;
+}
+
+.bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+
+  path {
+    fill: $white-100;
+    stroke: $black-40;
+    transition: fill $transition-base, stroke $transition-base;
+  }
+}
+
+.label {
+  position: relative;
+  z-index: 1;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 116%;
+  color: $black-100;
+  transition: color $transition-base;
+}
+
+// States
+.current {
+  .bg path {
+    stroke: $orange-100;
+  }
+
+  .label {
+    color: $orange-100;
+  }
+}
+
+.past {
+  .label {
+    color: $black-40;
+  }
+}

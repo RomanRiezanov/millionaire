@@ -1,0 +1,136 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "question": "What is the capital of France?",
+      "answers": [
+        { "id": "A", "text": "London", "isCorrect": false },
+        { "id": "B", "text": "Berlin", "isCorrect": false },
+        { "id": "C", "text": "Paris", "isCorrect": true },
+        { "id": "D", "text": "Madrid", "isCorrect": false }
+      ],
+      "prize": 100
+    },
+    {
+      "id": 2,
+      "question": "How many planets are in our solar system?",
+      "answers": [
+        { "id": "A", "text": "7", "isCorrect": false },
+        { "id": "B", "text": "8", "isCorrect": true },
+        { "id": "C", "text": "9", "isCorrect": false },
+        { "id": "D", "text": "10", "isCorrect": false }
+      ],
+      "prize": 200
+    },
+    {
+      "id": 3,
+      "question": "What is the chemical symbol for water?",
+      "answers": [
+        { "id": "A", "text": "CO2", "isCorrect": false },
+        { "id": "B", "text": "O2", "isCorrect": false },
+        { "id": "C", "text": "H2O", "isCorrect": true },
+        { "id": "D", "text": "NaCl", "isCorrect": false }
+      ],
+      "prize": 300
+    },
+    {
+      "id": 4,
+      "question": "Who painted the Mona Lisa?",
+      "answers": [
+        { "id": "A", "text": "Vincent van Gogh", "isCorrect": false },
+        { "id": "B", "text": "Pablo Picasso", "isCorrect": false },
+        { "id": "C", "text": "Michelangelo", "isCorrect": false },
+        { "id": "D", "text": "Leonardo da Vinci", "isCorrect": true }
+      ],
+      "prize": 500
+    },
+    {
+      "id": 5,
+      "question": "What is the largest ocean on Earth?",
+      "answers": [
+        { "id": "A", "text": "Atlantic Ocean", "isCorrect": false },
+        { "id": "B", "text": "Indian Ocean", "isCorrect": false },
+        { "id": "C", "text": "Pacific Ocean", "isCorrect": true },
+        { "id": "D", "text": "Arctic Ocean", "isCorrect": false }
+      ],
+      "prize": 1000
+    },
+    {
+      "id": 6,
+      "question": "In what year did World War II end?",
+      "answers": [
+        { "id": "A", "text": "1943", "isCorrect": false },
+        { "id": "B", "text": "1944", "isCorrect": false },
+        { "id": "C", "text": "1945", "isCorrect": true },
+        { "id": "D", "text": "1946", "isCorrect": false }
+      ],
+      "prize": 2000
+    },
+    {
+      "id": 7,
+      "question": "What is the square root of 144?",
+      "answers": [
+        { "id": "A", "text": "10", "isCorrect": false },
+        { "id": "B", "text": "11", "isCorrect": false },
+        { "id": "C", "text": "12", "isCorrect": true },
+        { "id": "D", "text": "14", "isCorrect": false }
+      ],
+      "prize": 4000
+    },
+    {
+      "id": 8,
+      "question": "Which element has the atomic number 1?",
+      "answers": [
+        { "id": "A", "text": "Helium", "isCorrect": false },
+        { "id": "B", "text": "Hydrogen", "isCorrect": true },
+        { "id": "C", "text": "Oxygen", "isCorrect": false },
+        { "id": "D", "text": "Lithium", "isCorrect": false }
+      ],
+      "prize": 8000
+    },
+    {
+      "id": 9,
+      "question": "What is the longest river in the world?",
+      "answers": [
+        { "id": "A", "text": "Amazon", "isCorrect": false },
+        { "id": "B", "text": "Yangtze", "isCorrect": false },
+        { "id": "C", "text": "Mississippi", "isCorrect": false },
+        { "id": "D", "text": "Nile", "isCorrect": true }
+      ],
+      "prize": 16000
+    },
+    {
+      "id": 10,
+      "question": "Who wrote 'Romeo and Juliet'?",
+      "answers": [
+        { "id": "A", "text": "Charles Dickens", "isCorrect": false },
+        { "id": "B", "text": "William Shakespeare", "isCorrect": true },
+        { "id": "C", "text": "Jane Austen", "isCorrect": false },
+        { "id": "D", "text": "Mark Twain", "isCorrect": false }
+      ],
+      "prize": 32000
+    },
+    {
+      "id": 11,
+      "question": "What is the speed of light in km/s (approximately)?",
+      "answers": [
+        { "id": "A", "text": "100,000 km/s", "isCorrect": false },
+        { "id": "B", "text": "200,000 km/s", "isCorrect": false },
+        { "id": "C", "text": "300,000 km/s", "isCorrect": true },
+        { "id": "D", "text": "400,000 km/s", "isCorrect": false }
+      ],
+      "prize": 64000
+    },
+    {
+      "id": 12,
+      "question": "How many bones are in the adult human body?",
+      "answers": [
+        { "id": "A", "text": "196", "isCorrect": false },
+        { "id": "B", "text": "206", "isCorrect": true },
+        { "id": "C", "text": "216", "isCorrect": false },
+        { "id": "D", "text": "226", "isCorrect": false }
+      ],
+      "prize": 1000000
+    }
+  ]
+}
