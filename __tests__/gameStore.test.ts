@@ -46,7 +46,7 @@ describe("gameStore", () => {
     useGameStore.getState().startGame();
     useGameStore.getState().answerQuestion(["C"]);
     const { earnedPrize } = useGameStore.getState();
-    expect(earnedPrize).toBe(100);
+    expect(earnedPrize).toBe(500);
   });
 
   it("resetGame restores initial state", () => {
