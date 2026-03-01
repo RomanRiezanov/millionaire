@@ -1,7 +1,7 @@
 .list {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 8px;
 }
 
 .item {
@@ -11,6 +11,25 @@
   justify-content: center;
   width: 240px;
   height: 40px;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 20px;
+    width: 200px;
+    height: 1px;
+    background: $black-40;
+    transition: background $transition-base;
+  }
+
+  &::before {
+    right: 100%;
+  }
+
+  &::after {
+    left: 100%;
+  }
 }
 
 .bg {
@@ -44,6 +63,11 @@
 
   .label {
     color: $orange-100;
+  }
+
+  &::before,
+  &::after {
+    background: $orange-100;
   }
 }
 

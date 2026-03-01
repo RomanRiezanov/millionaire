@@ -16,6 +16,28 @@
     padding: 0 32px 0 48px;
   }
 
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 28px;
+    width: 17px;
+    height: 1px;
+    background: $black-40;
+
+    @include respond-to(tablet) {
+      top: 36px;
+    }
+  }
+
+  &::before {
+    right: 100%;
+  }
+
+  &::after {
+    left: 100%;
+  }
+
   &:disabled {
     cursor: not-allowed;
   }
@@ -23,6 +45,11 @@
   &:hover:not(:disabled) {
     .bg path {
       stroke: $orange-100;
+    }
+
+    &::before,
+    &::after {
+      background: $orange-100;
     }
   }
 }
@@ -67,17 +94,38 @@
 }
 
 // States
-.selected .bg path {
-  fill: $orange-5;
-  stroke: $orange-100;
+.selected {
+  .bg path {
+    fill: $orange-5;
+    stroke: $orange-100;
+  }
+
+  &::before,
+  &::after {
+    background: $orange-100;
+  }
 }
 
-.correct .bg path {
-  fill: $green-5;
-  stroke: $green-100;
+.correct {
+  .bg path {
+    fill: $green-5;
+    stroke: $green-100;
+  }
+
+  &::before,
+  &::after {
+    background: $green-100;
+  }
 }
 
-.wrong .bg path {
-  fill: $red-5;
-  stroke: $red-100;
+.wrong {
+  .bg path {
+    fill: $red-5;
+    stroke: $red-100;
+  }
+
+  &::before,
+  &::after {
+    background: $red-100;
+  }
 }
