@@ -53,6 +53,10 @@
   line-height: 116%;
   color: $black-100;
   transition: color $transition-base;
+
+  @include ifmobile {
+    font-size: 14px;
+  }
 }
 
 // States

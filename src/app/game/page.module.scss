@@ -56,7 +56,7 @@
   max-width: 624px;
 
   @include ifmobile {
-    font-size: 22px;
+    font-size: 18px;
   }
 }
 
@@ -98,6 +98,8 @@
     justify-content: center;
     background: $black-5;
     overflow: hidden;
+
+    padding: 16px 0 32px;
   }
 }
 
@@ -111,5 +113,4 @@
   background: none;
   border: none;
   cursor: pointer;
-  padding: 4px;
 }
