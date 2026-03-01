@@ -1,11 +1,26 @@
 .page {
+  position: relative;
+
   display: flex;
+
   min-height: 100vh;
-  background: linear-gradient(135deg, $white-100 50%, $orange-5 50%);
+  background: $white-100;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: $orange-5;
+    clip-path: polygon(100% 0, 100% 100%, 0 100%);
+    pointer-events: none;
+  }
 }
 
 .imageSection {
+  position: relative;
+
   flex: 1;
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -19,18 +34,22 @@
 }
 
 .content {
+  position: relative;
+
+  z-index: 1;
   flex: 1;
+
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  gap: 32px;
-  padding: 40px;
+  gap: 64px;
 }
 
 .title {
   font-size: 56px;
   font-weight: 600;
   line-height: 116%;
+
   color: $black-100;
 }
