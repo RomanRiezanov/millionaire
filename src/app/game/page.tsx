@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { BurgerIcon } from "@/assets/icons/BurgerIcon";
 import { CloseIcon } from "@/assets/icons/CloseIcon";
@@ -26,6 +26,17 @@ export default function GamePage() {
   );
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const revealTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const nextTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(
+    () => () => {
+      if (revealTimerRef.current) clearTimeout(revealTimerRef.current);
+      if (nextTimerRef.current) clearTimeout(nextTimerRef.current);
+    },
+    []
+  );
+
   useEffect(() => {
     if (gameStatus === GameStatus.IDLE) {
       router.replace(ROUTES.HOME);
@@ -46,18 +57,21 @@ export default function GamePage() {
     setSelectedId(id);
     setAnswerStates({ [id]: AnswerState.SELECTED });
 
-    setTimeout(() => {
+    revealTimerRef.current = setTimeout(() => {
       if (!currentQuestion) return;
 
       setAnswerStates(
         Object.fromEntries(
           currentQuestion.answers
             .filter((a) => a.isCorrect || a.id === id)
-            .map((a) => [a.id, a.isCorrect ? AnswerState.CORRECT : AnswerState.WRONG])
+            .map((a) => [
+              a.id,
+              a.isCorrect ? AnswerState.CORRECT : AnswerState.WRONG,
+            ])
         )
       );
 
-      setTimeout(() => {
+      nextTimerRef.current = setTimeout(() => {
         answerQuestion(id);
       }, NEXT_QUESTION_DELAY);
     }, ANSWER_REVEAL_DELAY);
