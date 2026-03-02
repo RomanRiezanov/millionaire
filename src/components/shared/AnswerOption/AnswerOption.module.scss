@@ -105,6 +105,8 @@
 }
 
 .selected {
+  animation: pulse 1.2s ease-in-out infinite;
+
   .bg path {
     fill: $orange-5;
     stroke: $orange-100;
@@ -138,4 +140,9 @@
   &::after {
     background: $red-100;
   }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.04); }
 }

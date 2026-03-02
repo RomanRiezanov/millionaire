@@ -7,10 +7,10 @@ import { BurgerIcon } from "@/assets/icons/BurgerIcon";
 import { CloseIcon } from "@/assets/icons/CloseIcon";
 import { AnswerOption } from "@/components/shared/AnswerOption/AnswerOption";
 import { PrizeList } from "@/components/shared/PrizeList/PrizeList";
-import { AnswerState } from "@/constants/answerState";
 import { GameStatus } from "@/constants/gameStatus";
 import { ROUTES } from "@/constants/routes";
 import { ANSWER_REVEAL_DELAY, NEXT_QUESTION_DELAY } from "@/constants/timings";
+import { getAnswerState } from "@/helpers/getAnswerState";
 import { useGame } from "@/hooks/useGame";
 
 import styles from "./page.module.scss";
@@ -21,9 +21,7 @@ export default function GamePage() {
     useGame();
 
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  const [answerStates, setAnswerStates] = useState<Record<string, AnswerState>>(
-    {}
-  );
+  const [isRevealed, setIsRevealed] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const revealTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -48,28 +46,16 @@ export default function GamePage() {
 
   useEffect(() => {
     setSelectedId(null);
-    setAnswerStates({});
+    setIsRevealed(false);
   }, [currentQuestionIndex]);
 
   const handleAnswer = (id: string) => {
     if (selectedId !== null) return;
 
     setSelectedId(id);
-    setAnswerStates({ [id]: AnswerState.SELECTED });
 
     revealTimerRef.current = setTimeout(() => {
-      if (!currentQuestion) return;
-
-      setAnswerStates(
-        Object.fromEntries(
-          currentQuestion.answers
-            .filter((a) => a.isCorrect || a.id === id)
-            .map((a) => [
-              a.id,
-              a.isCorrect ? AnswerState.CORRECT : AnswerState.WRONG,
-            ])
-        )
-      );
+      setIsRevealed(true);
 
       nextTimerRef.current = setTimeout(() => {
         answerQuestion(id);
@@ -78,11 +64,7 @@ export default function GamePage() {
   };
 
   if (!currentQuestion || gameStatus !== GameStatus.PLAYING) {
-    return (
-      <main className={styles.container}>
-        <p className={styles.placeholder}>Redirecting...</p>
-      </main>
-    );
+    return null;
   }
 
   return (
@@ -98,7 +80,6 @@ export default function GamePage() {
             <BurgerIcon />
           </button>
         </div>
-
         <div className={styles.questionArea}>
           <h2 className={styles.question}>{currentQuestion.question}</h2>
 
@@ -107,14 +88,13 @@ export default function GamePage() {
               <AnswerOption
                 key={answer.id}
                 answer={answer}
-                state={answerStates[answer.id] ?? AnswerState.IDLE}
+                state={getAnswerState(answer, selectedId, isRevealed)}
                 onClick={handleAnswer}
                 disabled={selectedId !== null}
               />
             ))}
           </div>
         </div>
-
         <div className={styles.sidebar}>
           <PrizeList currentIndex={currentQuestionIndex} />
         </div>
