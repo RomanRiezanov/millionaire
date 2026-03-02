@@ -31,10 +31,12 @@ export default function StartPage() {
             priority
           />
         </div>
+
         <div className={styles.content}>
           <h1 className={styles.title}>
             Who wants to be <br />a millionaire?
           </h1>
+
           <Button onClick={handleStart}>Start</Button>
         </div>
       </div>

@@ -1,18 +1,23 @@
 .page {
   display: flex;
+
   min-height: 100vh;
+
   background: $black-5;
 }
 
 .contentWrapper {
   display: flex;
   flex-direction: row;
+
   width: 100%;
   max-width: $main-container-width;
+
   margin: 0 auto;
 
   @include ifmobile {
     flex-direction: column;
+
     min-height: 100vh;
     padding: 0 24px 48px;
   }
@@ -27,6 +32,7 @@
   @include ifmobile {
     align-items: flex-end;
     justify-content: center;
+
     padding-bottom: 24px;
   }
 }
@@ -53,6 +59,7 @@
   @include ifmobile {
     align-items: center;
     justify-content: space-between;
+
     width: 100%;
 
     button {
@@ -75,8 +82,10 @@
   font-size: 32px;
   font-weight: 600;
   line-height: 116%;
-  color: $black-100;
+
   opacity: 0.5;
+
+  color: $black-100;
 
   @include ifmobile {
     font-size: 20px;
@@ -87,6 +96,7 @@
   font-size: 56px;
   font-weight: 600;
   line-height: 116%;
+
   color: $black-100;
 
   @include ifmobile {

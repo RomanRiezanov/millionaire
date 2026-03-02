@@ -3,9 +3,12 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
+import BurgerIcon from "@/assets/icons/BurgerIcon";
+import CloseIcon from "@/assets/icons/CloseIcon";
 import AnswerOption from "@/components/shared/AnswerOption/AnswerOption";
 import PrizeList from "@/components/shared/PrizeList/PrizeList";
 import { AnswerState } from "@/constants/answerState";
+import GameStatus from "@/constants/gameStatus";
 import { ROUTES } from "@/constants/routes";
 import useGame from "@/hooks/useGame";
 
@@ -20,14 +23,13 @@ export default function GamePage() {
   const [answerStates, setAnswerStates] = useState<Record<string, AnswerState>>(
     {}
   );
-  const [isRevealing, setIsRevealing] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    if (gameStatus === "idle") {
+    if (gameStatus === GameStatus.IDLE) {
       router.replace(ROUTES.HOME);
     }
-    if (gameStatus === "won" || gameStatus === "lost") {
+    if (gameStatus === GameStatus.WON || gameStatus === GameStatus.LOST) {
       router.replace(ROUTES.RESULT);
     }
   }, [gameStatus, router]);
@@ -35,36 +37,29 @@ export default function GamePage() {
   useEffect(() => {
     setSelectedId(null);
     setAnswerStates({});
-    setIsRevealing(false);
   }, [currentQuestionIndex]);
 
   const handleAnswer = (id: string) => {
-    if (isRevealing || selectedId !== null) return;
+    if (selectedId !== null) return;
 
     setSelectedId(id);
     setAnswerStates({ [id]: AnswerState.SELECTED });
-    setIsRevealing(true);
 
     setTimeout(() => {
       if (!currentQuestion) return;
 
-      const newStates: Record<string, AnswerState> = {};
-      currentQuestion.answers.forEach((answer) => {
-        if (answer.isCorrect) {
-          newStates[answer.id] = AnswerState.CORRECT;
-        } else if (answer.id === id) {
-          newStates[answer.id] = AnswerState.WRONG;
-        }
-      });
-      setAnswerStates(newStates);
-
-      setTimeout(() => {
-        answerQuestion([id]);
-      }, 800);
+      setAnswerStates(
+        Object.fromEntries(
+          currentQuestion.answers
+            .filter((a) => a.isCorrect || a.id === id)
+            .map((a) => [a.id, a.isCorrect ? AnswerState.CORRECT : AnswerState.WRONG])
+        )
+      );
+      answerQuestion([id]);
     }, 1000);
   };
 
-  if (!currentQuestion || gameStatus !== "playing") {
+  if (!currentQuestion || gameStatus !== GameStatus.PLAYING) {
     return null;
   }
 
@@ -78,17 +73,7 @@ export default function GamePage() {
             onClick={() => setIsMenuOpen(true)}
             aria-label="Open prize menu"
           >
-            <svg
-              width="24"
-              height="18"
-              viewBox="0 0 24 18"
-              fill="none"
-              aria-hidden="true"
-            >
-              <rect width="24" height="2" rx="1" fill="#1C1C21" />
-              <rect y="8" width="24" height="2" rx="1" fill="#1C1C21" />
-              <rect y="16" width="24" height="2" rx="1" fill="#1C1C21" />
-            </svg>
+            <BurgerIcon />
           </button>
         </div>
 
@@ -102,7 +87,7 @@ export default function GamePage() {
                 answer={answer}
                 state={answerStates[answer.id] ?? AnswerState.IDLE}
                 onClick={handleAnswer}
-                disabled={isRevealing}
+                disabled={selectedId !== null}
               />
             ))}
           </div>
@@ -121,21 +106,9 @@ export default function GamePage() {
             onClick={() => setIsMenuOpen(false)}
             aria-label="Close prize menu"
           >
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              aria-hidden="true"
-            >
-              <path
-                d="M18 6L6 18M6 6L18 18"
-                stroke="#1C1C21"
-                strokeWidth="2"
-                strokeLinecap="round"
-              />
-            </svg>
+            <CloseIcon />
           </button>
+
           <PrizeList currentIndex={currentQuestionIndex} />
         </div>
       )}
