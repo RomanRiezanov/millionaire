@@ -21,3 +21,9 @@
   align-items: center;
   justify-content: center;
 }
+
+@mixin only-hover {
+  @media (hover: hover) and (pointer: fine) {
+    @content;
+  }
+}

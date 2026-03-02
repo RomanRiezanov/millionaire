@@ -48,14 +48,16 @@
     cursor: not-allowed;
   }
 
-  &:hover:not(:disabled) {
-    .bg path {
-      stroke: $orange-100;
-    }
+  @include only-hover {
+    &:hover:not(:disabled) {
+      .bg path {
+        stroke: $orange-100;
+      }
 
-    &::before,
-    &::after {
-      background: $orange-100;
+      &::before,
+      &::after {
+        background: $orange-100;
+      }
     }
   }
 }
