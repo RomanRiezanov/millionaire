@@ -2,7 +2,7 @@ import { SVGProps } from "react";
 
 type AnswerShapeIconProps = SVGProps<SVGSVGElement>;
 
-function AnswerShapeIcon({ ...props }: AnswerShapeIconProps) {
+export function AnswerShapeIcon({ ...props }: AnswerShapeIconProps) {
   return (
     <svg
       viewBox="0 0 373 72"
@@ -14,5 +14,3 @@ function AnswerShapeIcon({ ...props }: AnswerShapeIconProps) {
     </svg>
   );
 }
-
-export default AnswerShapeIcon;

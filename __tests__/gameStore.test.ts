@@ -1,4 +1,4 @@
-import useGameStore from "../src/store/gameStore";
+import { useGameStore } from "../src/store/gameStore";
 
 // Reset store state before each test
 beforeEach(() => {

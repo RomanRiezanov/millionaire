@@ -2,7 +2,7 @@ import { SVGProps } from "react";
 
 type PrizeShapeIconProps = SVGProps<SVGSVGElement>;
 
-function PrizeShapeIcon({ ...props }: PrizeShapeIconProps) {
+export function PrizeShapeIcon({ ...props }: PrizeShapeIconProps) {
   return (
     <svg
       viewBox="0 0 240 40"
@@ -14,5 +14,3 @@ function PrizeShapeIcon({ ...props }: PrizeShapeIconProps) {
     </svg>
   );
 }
-
-export default PrizeShapeIcon;

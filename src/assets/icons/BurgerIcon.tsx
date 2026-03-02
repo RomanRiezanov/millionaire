@@ -2,7 +2,11 @@ import { SVGProps } from "react";
 
 type BurgerIconProps = SVGProps<SVGSVGElement>;
 
-function BurgerIcon({ width = 24, height = 24, ...props }: BurgerIconProps) {
+export function BurgerIcon({
+  width = 24,
+  height = 24,
+  ...props
+}: BurgerIconProps) {
   return (
     <svg
       width={width}
@@ -27,5 +31,3 @@ function BurgerIcon({ width = 24, height = 24, ...props }: BurgerIconProps) {
     </svg>
   );
 }
-
-export default BurgerIcon;

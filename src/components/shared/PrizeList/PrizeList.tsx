@@ -1,18 +1,18 @@
 import classNames from "classnames";
 
-import PrizeShapeIcon from "@/assets/icons/PrizeShapeIcon";
+import { PrizeShapeIcon } from "@/assets/icons/PrizeShapeIcon";
 import gameConfig from "@/config/questions.json";
 import { formatPrize } from "@/helpers/formatPrize";
 
 import styles from "./PrizeList.module.scss";
 
+const prizes = [...gameConfig.questions].reverse();
+
 interface PrizeListProps {
   currentIndex: number;
 }
 
-function PrizeList({ currentIndex }: PrizeListProps) {
-  const prizes = [...gameConfig.questions].reverse();
-
+export function PrizeList({ currentIndex }: PrizeListProps) {
   return (
     <aside className={styles.list} aria-label="Prize ladder">
       {prizes.map((question, reversedIdx) => {
@@ -38,5 +38,3 @@ function PrizeList({ currentIndex }: PrizeListProps) {
     </aside>
   );
 }
-
-export default PrizeList;

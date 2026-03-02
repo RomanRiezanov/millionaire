@@ -1,16 +1,17 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-import BurgerIcon from "@/assets/icons/BurgerIcon";
-import CloseIcon from "@/assets/icons/CloseIcon";
-import AnswerOption from "@/components/shared/AnswerOption/AnswerOption";
-import PrizeList from "@/components/shared/PrizeList/PrizeList";
+import { BurgerIcon } from "@/assets/icons/BurgerIcon";
+import { CloseIcon } from "@/assets/icons/CloseIcon";
+import { AnswerOption } from "@/components/shared/AnswerOption/AnswerOption";
+import { PrizeList } from "@/components/shared/PrizeList/PrizeList";
 import { AnswerState } from "@/constants/answerState";
-import GameStatus from "@/constants/gameStatus";
+import { GameStatus } from "@/constants/gameStatus";
 import { ROUTES } from "@/constants/routes";
-import useGame from "@/hooks/useGame";
+import { ANSWER_REVEAL_DELAY, NEXT_QUESTION_DELAY } from "@/constants/timings";
+import { useGame } from "@/hooks/useGame";
 
 import styles from "./page.module.scss";
 
@@ -24,6 +25,17 @@ export default function GamePage() {
     {}
   );
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const revealTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const nextTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(
+    () => () => {
+      if (revealTimerRef.current) clearTimeout(revealTimerRef.current);
+      if (nextTimerRef.current) clearTimeout(nextTimerRef.current);
+    },
+    []
+  );
 
   useEffect(() => {
     if (gameStatus === GameStatus.IDLE) {
@@ -45,25 +57,32 @@ export default function GamePage() {
     setSelectedId(id);
     setAnswerStates({ [id]: AnswerState.SELECTED });
 
-    setTimeout(() => {
+    revealTimerRef.current = setTimeout(() => {
       if (!currentQuestion) return;
 
       setAnswerStates(
         Object.fromEntries(
           currentQuestion.answers
             .filter((a) => a.isCorrect || a.id === id)
-            .map((a) => [a.id, a.isCorrect ? AnswerState.CORRECT : AnswerState.WRONG])
+            .map((a) => [
+              a.id,
+              a.isCorrect ? AnswerState.CORRECT : AnswerState.WRONG,
+            ])
         )
       );
 
-      setTimeout(() => {
+      nextTimerRef.current = setTimeout(() => {
         answerQuestion(id);
-      }, 1000);
-    }, 1000);
+      }, NEXT_QUESTION_DELAY);
+    }, ANSWER_REVEAL_DELAY);
   };
 
   if (!currentQuestion || gameStatus !== GameStatus.PLAYING) {
-    return null;
+    return (
+      <main className={styles.container}>
+        <p className={styles.placeholder}>Redirecting...</p>
+      </main>
+    );
   }
 
   return (

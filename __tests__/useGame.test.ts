@@ -1,7 +1,7 @@
 import { renderHook } from "@testing-library/react";
 
-import useGame from "../src/hooks/useGame";
-import useGameStore from "../src/store/gameStore";
+import { useGame } from "../src/hooks/useGame";
+import { useGameStore } from "../src/store/gameStore";
 
 beforeEach(() => {
   useGameStore.getState().resetGame();
