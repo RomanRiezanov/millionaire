@@ -55,7 +55,10 @@ export default function GamePage() {
             .map((a) => [a.id, a.isCorrect ? AnswerState.CORRECT : AnswerState.WRONG])
         )
       );
-      answerQuestion(id);
+
+      setTimeout(() => {
+        answerQuestion(id);
+      }, 1000);
     }, 1000);
   };
 
