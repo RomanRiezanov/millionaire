@@ -20,8 +20,8 @@ describe("gameStore", () => {
 
   it("correct answer advances to next question", () => {
     useGameStore.getState().startGame();
-    // Question 1 correct answer is "C" (Paris)
-    useGameStore.getState().answerQuestion(["C"]);
+    // Question 1: "In what year was Headway Inc founded?" — correct answer is "C" (2019)
+    useGameStore.getState().answerQuestion("C");
     const { currentQuestionIndex, gameStatus } = useGameStore.getState();
     expect(gameStatus).toBe("playing");
     expect(currentQuestionIndex).toBe(1);
@@ -29,29 +29,29 @@ describe("gameStore", () => {
 
   it("wrong answer sets status to lost", () => {
     useGameStore.getState().startGame();
-    // Question 1 correct answer is "C", so "A" is wrong
-    useGameStore.getState().answerQuestion(["A"]);
+    // Question 1: "A" (2017) is wrong
+    useGameStore.getState().answerQuestion("A");
     const { gameStatus } = useGameStore.getState();
     expect(gameStatus).toBe("lost");
   });
 
   it("wrong answer does not advance question index", () => {
     useGameStore.getState().startGame();
-    useGameStore.getState().answerQuestion(["A"]);
+    useGameStore.getState().answerQuestion("A");
     const { currentQuestionIndex } = useGameStore.getState();
     expect(currentQuestionIndex).toBe(0);
   });
 
   it("correct answer saves earned prize", () => {
     useGameStore.getState().startGame();
-    useGameStore.getState().answerQuestion(["C"]);
+    useGameStore.getState().answerQuestion("C");
     const { earnedPrize } = useGameStore.getState();
     expect(earnedPrize).toBe(500);
   });
 
   it("resetGame restores initial state", () => {
     useGameStore.getState().startGame();
-    useGameStore.getState().answerQuestion(["C"]);
+    useGameStore.getState().answerQuestion("C");
     useGameStore.getState().resetGame();
     const { gameStatus, currentQuestionIndex, earnedPrize } =
       useGameStore.getState();
