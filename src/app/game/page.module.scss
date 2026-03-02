@@ -21,7 +21,7 @@
     display: flex;
 
     justify-content: flex-end;
-    padding: 16px 20px;
+    padding: 16px;
     background: $black-5;
   }
 }
@@ -36,8 +36,6 @@
   border: none;
 
   cursor: pointer;
-
-  padding: 4px;
 }
 
 .questionArea {
@@ -65,6 +63,10 @@
   color: $black-100;
 
   @include ifmobile {
+    flex: 1;
+    display: flex;
+    align-items: center;
+
     font-size: 18px;
   }
 }

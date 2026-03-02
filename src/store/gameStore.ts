@@ -21,18 +21,12 @@ const useGameStore = create<StoreState>((set, get) => ({
     set({ ...initialState, gameStatus: GameStatus.PLAYING });
   },
 
-  answerQuestion: (answerIds: string[]) => {
+  answerQuestion: (answerId: string) => {
     const { currentQuestionIndex } = get();
     const question = gameConfig.questions[currentQuestionIndex];
 
-    const correctIds = question.answers
-      .filter((a) => a.isCorrect)
-      .map((a) => a.id)
-      .sort();
-
-    const selectedIds = [...answerIds].sort();
     const isCorrect =
-      JSON.stringify(correctIds) === JSON.stringify(selectedIds);
+      question.answers.find((a) => a.id === answerId)?.isCorrect ?? false;
 
     if (!isCorrect) {
       set({ gameStatus: GameStatus.LOST });
@@ -42,10 +36,7 @@ const useGameStore = create<StoreState>((set, get) => ({
     const isLastQuestion = currentQuestionIndex === TOTAL_QUESTIONS - 1;
 
     if (isLastQuestion) {
-      set({
-        gameStatus: GameStatus.WON,
-        earnedPrize: question.prize,
-      });
+      set({ gameStatus: GameStatus.WON, earnedPrize: question.prize });
       return;
     }
 

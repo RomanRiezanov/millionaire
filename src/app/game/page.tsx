@@ -55,7 +55,7 @@ export default function GamePage() {
             .map((a) => [a.id, a.isCorrect ? AnswerState.CORRECT : AnswerState.WRONG])
         )
       );
-      answerQuestion([id]);
+      answerQuestion(id);
     }, 1000);
   };
 
