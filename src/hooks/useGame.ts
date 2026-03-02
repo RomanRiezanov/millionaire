@@ -9,7 +9,7 @@ interface UseGameReturn {
   gameStatus: string;
   earnedPrize: number;
   startGame: () => void;
-  answerQuestion: (answerIds: string[]) => void;
+  answerQuestion: (answerId: string) => void;
   resetGame: () => void;
 }
 

@@ -1,4 +1,5 @@
 {
+  "ignorePatterns": ["next-env.d.ts", ".next/", "node_modules/"],
   "env": {
     "browser": true,
     "es2021": true,
@@ -42,7 +43,8 @@
     "@typescript-eslint/comma-dangle": "off",
     "comma-dangle": "off",
     "operator-linebreak": "off",
-    "react/jsx-one-expression-per-line": "off"
+    "react/jsx-one-expression-per-line": "off",
+    "object-curly-newline": "off"
   },
   "settings": {
     "import/resolver": {

@@ -1,3 +1,7 @@
+import GameStatus from "@/constants/gameStatus";
+
+export { GameStatus };
+
 export interface Answer {
   id: string;
   text: string;
@@ -15,13 +19,11 @@ export interface GameConfig {
   questions: Question[];
 }
 
-export type GameStatus = "idle" | "playing" | "won" | "lost";
-
 export interface GameState {
   currentQuestionIndex: number;
   gameStatus: GameStatus;
   earnedPrize: number;
   startGame: () => void;
-  answerQuestion: (answerIds: string[]) => void;
+  answerQuestion: (answerId: string) => void;
   resetGame: () => void;
 }

@@ -1,46 +1,133 @@
 .container {
+  display: flex;
   min-height: 100vh;
-  padding: $spacing-lg $spacing-md;
-
-  @include respond-to(tablet) {
-    padding: $spacing-xl $spacing-lg;
-  }
 }
 
 .game {
-  max-width: 1200px;
-  margin: 0 auto;
   display: flex;
-  flex-direction: column;
-  gap: $spacing-xl;
+  flex-direction: row;
+  width: 100%;
+  min-height: 100vh;
 
-  @include respond-to(desktop) {
-    flex-direction: row;
-    align-items: flex-start;
-    gap: $spacing-2xl;
+  @include ifmobile {
+    flex-direction: column;
   }
+}
+
+.mobileHeader {
+  display: none;
+
+  @include ifmobile {
+    display: flex;
+
+    justify-content: flex-end;
+    padding: 16px;
+    background: $black-5;
+  }
+}
+
+.burgerBtn {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  background: none;
+  border: none;
+
+  cursor: pointer;
 }
 
 .questionArea {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: $spacing-lg;
+  justify-content: space-between;
+
+  padding: 132px 80px 122px;
+
+  background: $black-5;
+
+  @include ifmobile {
+    padding: 32px 20px 48px;
+  }
+}
+
+.question {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 116%;
+
+  max-width: 624px;
+
+  color: $black-100;
+
+  @include ifmobile {
+    flex: 1;
+    display: flex;
+    align-items: center;
+
+    font-size: 18px;
+  }
 }
 
 .answers {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: $spacing-md;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px 34px;
 
-  @include respond-to(tablet) {
-    grid-template-columns: 1fr 1fr;
+  @include ifmobile {
+    grid-template-columns: 1fr;
+    gap: 8px;
   }
 }
 
 .sidebar {
-  @include respond-to(desktop) {
-    position: sticky;
-    top: $spacing-lg;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 376px;
+  overflow: hidden;
+
+  @include ifmobile {
+    display: none;
   }
+}
+
+// Mobile prize modal
+.modal {
+  display: none;
+
+  @include ifmobile {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background: $black-5;
+    overflow: hidden;
+
+    padding: 16px 0 32px;
+  }
+}
+
+.closeBtn {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: none;
+  border: none;
+
+  cursor: pointer;
 }

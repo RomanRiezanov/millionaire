@@ -1,14 +1,9 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "baseUrl": "."
+    "moduleResolution": "node",
+    "module": "commonjs"
   },
-  "exclude": ["node_modules"],
-  "include": [
-    "src/**/*",
-    "__tests__/**/*.ts",
-    "__tests__/**/*.tsx",
-    "jest.config.ts",
-    "jest.setup.ts"
-  ]
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
 }

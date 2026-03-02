@@ -1,28 +1,33 @@
 // Breakpoints
 $bp-mobile: 375px;
 $bp-tablet: 768px;
-$bp-desktop: 1280px;
+$bp-desktop: 1248px;
 $bp-wide: 2560px;
 
+// Container widths
+$main-container-width: 1264px;
+$tablet-container-width: 1024px;
+$mobile-container-width: 768px;
+
 // Colors — Orange
-$orange-120: #E87928;
-$orange-100: #FF8B37;
-$orange-80:  #FFAC70;
-$orange-5:   #FFF3EB;
+$orange-120: #e87928;
+$orange-100: #ff8b37;
+$orange-80: #ffac70;
+$orange-5: #fff3eb;
 
 // Colors — Green
-$green-100: #47D867;
-$green-5:   #E6FAEA;
+$green-100: #47d867;
+$green-5: #e6faea;
 
 // Colors — Red
-$red-100: #EC6259;
-$red-5:   #FDEEED;
+$red-100: #ec6259;
+$red-5: #fdeeed;
 
 // Colors — Black / White
-$black-100: #1C1C21;
-$black-40:  #D0D0D8;
-$black-5:   #F5F5F7;
-$white-100: #FFFFFF;
+$black-100: #1c1c21;
+$black-40: #d0d0d8;
+$black-5: #f5f5f7;
+$white-100: #ffffff;
 
 // Typography
 $font-family: "Georgia", serif;
@@ -48,26 +53,3 @@ $radius-full: 9999px;
 
 // Transitions
 $transition-base: 0.2s ease;
-
-// Mixins
-@mixin respond-to($bp) {
-  @if $bp == tablet {
-    @media (min-width: $bp-tablet) {
-      @content;
-    }
-  } @else if $bp == desktop {
-    @media (min-width: $bp-desktop) {
-      @content;
-    }
-  } @else if $bp == wide {
-    @media (min-width: $bp-wide) {
-      @content;
-    }
-  }
-}
-
-@mixin flex-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}

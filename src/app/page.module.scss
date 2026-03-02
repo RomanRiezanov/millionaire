@@ -1,14 +1,58 @@
 .page {
+  position: relative;
+
   display: flex;
+
   min-height: 100vh;
-  background: linear-gradient(135deg, $white-100 50%, $orange-5 50%);
+
+  background: $white-100;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: $orange-5;
+    clip-path: polygon(100% 0, 100% 100%, 0 100%);
+    pointer-events: none;
+  }
+}
+
+.contentWrapper {
+  position: relative;
+  display: flex;
+  gap: 32px;
+
+  max-width: $main-container-width;
+  margin: 0 auto;
+
+  padding: 0 16px;
+
+  @include ifdesktopM {
+    gap: 24px;
+  }
+
+  @include ifmobile {
+    width: 100%;
+
+    flex-direction: column;
+    min-height: 100vh;
+    padding: 0 16px 48px;
+  }
 }
 
 .imageSection {
-  flex: 1;
+  position: relative;
+  z-index: 1;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @include ifmobile {
+    flex: 1;
+    align-items: flex-end;
+    padding-bottom: 24px;
+  }
 }
 
 .thumb {
@@ -16,16 +60,31 @@
   height: auto;
   max-width: 560px;
   object-fit: contain;
+
+  @include ifmobile {
+    max-width: 320px;
+  }
 }
 
 .content {
-  flex: 1;
+  position: relative;
+  z-index: 1;
+
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  gap: 32px;
-  padding: 40px;
+  gap: 64px;
+
+  @include ifmobile {
+    flex: 1;
+    justify-content: space-between;
+    align-items: stretch;
+
+    button {
+      max-width: 100%;
+    }
+  }
 }
 
 .title {
@@ -33,4 +92,15 @@
   font-weight: 600;
   line-height: 116%;
   color: $black-100;
+
+  white-space: nowrap;
+
+  @include ifdesktopM {
+    font-size: 42px;
+  }
+
+  @include ifmobile {
+    font-size: 32px;
+    text-align: center;
+  }
 }

@@ -3,10 +3,12 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
+import BurgerIcon from "@/assets/icons/BurgerIcon";
+import CloseIcon from "@/assets/icons/CloseIcon";
 import AnswerOption from "@/components/shared/AnswerOption/AnswerOption";
 import PrizeList from "@/components/shared/PrizeList/PrizeList";
-import Question from "@/components/shared/Question/Question";
 import { AnswerState } from "@/constants/answerState";
+import GameStatus from "@/constants/gameStatus";
 import { ROUTES } from "@/constants/routes";
 import useGame from "@/hooks/useGame";
 
@@ -14,25 +16,20 @@ import styles from "./page.module.scss";
 
 export default function GamePage() {
   const router = useRouter();
-  const {
-    currentQuestion,
-    currentQuestionIndex,
-    totalQuestions,
-    gameStatus,
-    answerQuestion,
-  } = useGame();
+  const { currentQuestion, currentQuestionIndex, gameStatus, answerQuestion } =
+    useGame();
 
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [answerStates, setAnswerStates] = useState<Record<string, AnswerState>>(
     {}
   );
-  const [isRevealing, setIsRevealing] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    if (gameStatus === "idle") {
+    if (gameStatus === GameStatus.IDLE) {
       router.replace(ROUTES.HOME);
     }
-    if (gameStatus === "won" || gameStatus === "lost") {
+    if (gameStatus === GameStatus.WON || gameStatus === GameStatus.LOST) {
       router.replace(ROUTES.RESULT);
     }
   }, [gameStatus, router]);
@@ -40,48 +37,52 @@ export default function GamePage() {
   useEffect(() => {
     setSelectedId(null);
     setAnswerStates({});
-    setIsRevealing(false);
   }, [currentQuestionIndex]);
 
   const handleAnswer = (id: string) => {
-    if (isRevealing || selectedId !== null) return;
+    if (selectedId !== null) return;
 
     setSelectedId(id);
     setAnswerStates({ [id]: AnswerState.SELECTED });
-    setIsRevealing(true);
 
     setTimeout(() => {
       if (!currentQuestion) return;
 
-      const newStates: Record<string, AnswerState> = {};
-      currentQuestion.answers.forEach((answer) => {
-        if (answer.isCorrect) {
-          newStates[answer.id] = AnswerState.CORRECT;
-        } else if (answer.id === id) {
-          newStates[answer.id] = AnswerState.WRONG;
-        }
-      });
-      setAnswerStates(newStates);
+      setAnswerStates(
+        Object.fromEntries(
+          currentQuestion.answers
+            .filter((a) => a.isCorrect || a.id === id)
+            .map((a) => [a.id, a.isCorrect ? AnswerState.CORRECT : AnswerState.WRONG])
+        )
+      );
 
       setTimeout(() => {
-        answerQuestion([id]);
-      }, 800);
+        answerQuestion(id);
+      }, 1000);
     }, 1000);
   };
 
-  if (!currentQuestion || gameStatus !== "playing") {
+  if (!currentQuestion || gameStatus !== GameStatus.PLAYING) {
     return null;
   }
 
   return (
     <main className={styles.container}>
       <div className={styles.game}>
+        <div className={styles.mobileHeader}>
+          <button
+            type="button"
+            className={styles.burgerBtn}
+            onClick={() => setIsMenuOpen(true)}
+            aria-label="Open prize menu"
+          >
+            <BurgerIcon />
+          </button>
+        </div>
+
         <div className={styles.questionArea}>
-          <Question
-            text={currentQuestion.question}
-            number={currentQuestionIndex + 1}
-            total={totalQuestions}
-          />
+          <h2 className={styles.question}>{currentQuestion.question}</h2>
+
           <div className={styles.answers}>
             {currentQuestion.answers.map((answer) => (
               <AnswerOption
@@ -89,15 +90,31 @@ export default function GamePage() {
                 answer={answer}
                 state={answerStates[answer.id] ?? AnswerState.IDLE}
                 onClick={handleAnswer}
-                disabled={isRevealing}
+                disabled={selectedId !== null}
               />
             ))}
           </div>
         </div>
+
         <div className={styles.sidebar}>
           <PrizeList currentIndex={currentQuestionIndex} />
         </div>
       </div>
+
+      {isMenuOpen && (
+        <div className={styles.modal}>
+          <button
+            type="button"
+            className={styles.closeBtn}
+            onClick={() => setIsMenuOpen(false)}
+            aria-label="Close prize menu"
+          >
+            <CloseIcon />
+          </button>
+
+          <PrizeList currentIndex={currentQuestionIndex} />
+        </div>
+      )}
     </main>
   );
 }

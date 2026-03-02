@@ -1,19 +1,47 @@
 .option {
   position: relative;
+
   display: flex;
   align-items: center;
   gap: 8px;
+
   width: 100%;
-  height: 56px;
-  padding: 0 24px 0 32px;
+  height: 72px;
+
+  padding: 0 32px 0 48px;
+
   background: none;
   border: none;
+
   cursor: pointer;
+
   text-align: left;
 
-  @include respond-to(tablet) {
-    height: 72px;
-    padding: 0 32px 0 48px;
+  @include ifmobile {
+    height: 56px;
+    padding: 0 24px 0 32px;
+  }
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 36px;
+    width: 17px;
+    height: 1px;
+    background: $black-40;
+
+    @include ifmobile {
+      top: 28px;
+    }
+  }
+
+  &::before {
+    right: 100%;
+  }
+
+  &::after {
+    left: 100%;
   }
 
   &:disabled {
@@ -24,12 +52,18 @@
     .bg path {
       stroke: $orange-100;
     }
+
+    &::before,
+    &::after {
+      background: $orange-100;
+    }
   }
 }
 
 .bg {
   position: absolute;
   inset: 0;
+
   width: 100%;
   height: 100%;
 
@@ -43,41 +77,65 @@
 .letter {
   position: relative;
   z-index: 1;
+
   font-weight: 600;
-  font-size: 14px;
+  font-size: 20px;
   line-height: 116%;
+
   color: $orange-100;
 
-  @include respond-to(tablet) {
-    font-size: 20px;
+  @include ifmobile {
+    font-size: 14px;
   }
 }
 
 .text {
   position: relative;
   z-index: 1;
+
   font-weight: 400;
-  font-size: 14px;
+  font-size: 20px;
   line-height: 116%;
+
   color: $black-100;
 
-  @include respond-to(tablet) {
-    font-size: 20px;
+  @include ifmobile {
+    font-size: 14px;
   }
 }
 
-// States
-.selected .bg path {
-  fill: $orange-5;
-  stroke: $orange-100;
+.selected {
+  .bg path {
+    fill: $orange-5;
+    stroke: $orange-100;
+  }
+
+  &::before,
+  &::after {
+    background: $orange-100;
+  }
 }
 
-.correct .bg path {
-  fill: $green-5;
-  stroke: $green-100;
+.correct {
+  .bg path {
+    fill: $green-5;
+    stroke: $green-100;
+  }
+
+  &::before,
+  &::after {
+    background: $green-100;
+  }
 }
 
-.wrong .bg path {
-  fill: $red-5;
-  stroke: $red-100;
+.wrong {
+  .bg path {
+    fill: $red-5;
+    stroke: $red-100;
+  }
+
+  &::before,
+  &::after {
+    background: $red-100;
+  }
 }

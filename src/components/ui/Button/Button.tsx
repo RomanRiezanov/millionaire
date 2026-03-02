@@ -1,4 +1,4 @@
-import cn from "classnames";
+import classNames from "classnames";
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 
 import styles from "./Button.module.scss";
@@ -16,15 +16,17 @@ function Button({
   className,
   ...rest
 }: ButtonProps) {
-  const classNames = cn(
-    styles.button,
-    styles[variant],
-    fullWidth && styles.fullWidth,
-    className
-  );
-
   return (
-    <button type="button" className={classNames} {...rest}>
+    <button
+      type="button"
+      className={classNames(
+        styles.button,
+        styles[variant],
+        fullWidth && styles.fullWidth,
+        className
+      )}
+      {...rest}
+    >
       {children}
     </button>
   );

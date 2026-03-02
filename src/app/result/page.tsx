@@ -1,10 +1,11 @@
 "use client";
 
-import classNames from "classnames";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 import Button from "@/components/ui/Button/Button";
+import GameStatus from "@/constants/gameStatus";
 import { ROUTES } from "@/constants/routes";
 import { formatPrize } from "@/helpers/formatPrize";
 import useGameStore from "@/store/gameStore";
@@ -16,56 +17,42 @@ export default function ResultPage() {
   const { gameStatus, earnedPrize, resetGame } = useGameStore();
 
   useEffect(() => {
-    if (gameStatus === "idle" || gameStatus === "playing") {
+    if (gameStatus === GameStatus.IDLE || gameStatus === GameStatus.PLAYING) {
       router.replace(ROUTES.HOME);
     }
   }, [gameStatus, router]);
 
   const handlePlayAgain = () => {
     resetGame();
-    router.push(ROUTES.HOME);
+    router.replace(ROUTES.HOME);
   };
 
-  if (gameStatus === "idle" || gameStatus === "playing") {
+  if (gameStatus === GameStatus.IDLE || gameStatus === GameStatus.PLAYING) {
     return null;
   }
 
-  const isWon = gameStatus === "won";
-
   return (
-    <main className={styles.container}>
-      <div className={styles.content}>
-        <div
-          className={classNames(
-            styles.icon,
-            isWon ? styles.iconWon : styles.iconLost,
-          )}
-        >
-          {isWon ? "🏆" : "😔"}
+    <main className={styles.page}>
+      <div className={styles.contentWrapper}>
+        <div className={styles.imageSection}>
+          <Image
+            src="/hand.webp"
+            alt="hand"
+            width={560}
+            height={560}
+            className={styles.thumb}
+            priority
+          />
         </div>
 
-        <h1 className={styles.title}>
-          {isWon ? "Congratulations!" : "Game Over"}
-        </h1>
+        <div className={styles.content}>
+          <div className={styles.scoreBlock}>
+            <p className={styles.label}>Total score:</p>
+            <h1 className={styles.title}>${formatPrize(earnedPrize)} earned</h1>
+          </div>
 
-        <p className={styles.subtitle}>
-          {isWon
-            ? "You answered all questions correctly!"
-            : "You gave a wrong answer."}
-        </p>
-
-        <div className={styles.prizeCard}>
-          <p className={styles.prizeLabel}>
-            {isWon ? "You won" : "You earned"}
-          </p>
-          <p className={classNames(styles.prizeAmount, isWon && styles.prizeWon)}>
-            <span>{`$${formatPrize(earnedPrize)}`}</span>
-          </p>
+          <Button onClick={handlePlayAgain}>Try again</Button>
         </div>
-
-        <Button onClick={handlePlayAgain} fullWidth>
-          Play Again
-        </Button>
       </div>
     </main>
   );

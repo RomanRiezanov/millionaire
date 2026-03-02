@@ -1,0 +1,23 @@
+@mixin ifmobile {
+  @media only screen and (max-width: 767px) {
+    @content;
+  }
+}
+
+@mixin iftablet {
+  @media only screen and (max-width: 1023px) {
+    @content;
+  }
+}
+
+@mixin ifdesktopM {
+  @media only screen and (max-width: 1439px) {
+    @content;
+  }
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

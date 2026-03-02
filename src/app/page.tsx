@@ -20,19 +20,25 @@ export default function StartPage() {
 
   return (
     <main className={styles.page}>
-      <div className={styles.imageSection}>
-        <Image
-          src="/thumb.png"
-          alt=""
-          width={560}
-          height={560}
-          className={styles.thumb}
-          priority
-        />
-      </div>
-      <div className={styles.content}>
-        <h1 className={styles.title}>Who wants to be a millionaire?</h1>
-        <Button onClick={handleStart}>Start</Button>
+      <div className={styles.contentWrapper}>
+        <div className={styles.imageSection}>
+          <Image
+            src="/hand.webp"
+            alt="hand"
+            width={560}
+            height={560}
+            className={styles.thumb}
+            priority
+          />
+        </div>
+
+        <div className={styles.content}>
+          <h1 className={styles.title}>
+            Who wants to be <br />a millionaire?
+          </h1>
+
+          <Button onClick={handleStart}>Start</Button>
+        </div>
       </div>
     </main>
   );
