@@ -78,11 +78,7 @@ export default function GamePage() {
   };
 
   if (!currentQuestion || gameStatus !== GameStatus.PLAYING) {
-    return (
-      <main className={styles.container}>
-        <p className={styles.placeholder}>Redirecting...</p>
-      </main>
-    );
+    return null;
   }
 
   return (

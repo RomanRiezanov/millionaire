@@ -29,11 +29,7 @@ export default function ResultPage() {
   };
 
   if (shouldRedirect) {
-    return (
-      <main className={styles.page}>
-        <p className={styles.placeholder}>Redirecting...</p>
-      </main>
-    );
+    return null;
   }
 
   return (
