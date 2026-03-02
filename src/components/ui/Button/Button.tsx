@@ -7,18 +7,20 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   variant?: "primary" | "secondary";
   fullWidth?: boolean;
+  type?: "button" | "submit" | "reset";
 }
 
-function Button({
+export function Button({
   children,
   variant = "primary",
   fullWidth = false,
   className,
+  type = "button",
   ...rest
 }: ButtonProps) {
   return (
     <button
-      type="button"
+      type={type}
       className={classNames(
         styles.button,
         styles[variant],
@@ -31,5 +33,3 @@ function Button({
     </button>
   );
 }
-
-export default Button;

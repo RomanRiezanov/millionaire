@@ -44,7 +44,8 @@
     "comma-dangle": "off",
     "operator-linebreak": "off",
     "react/jsx-one-expression-per-line": "off",
-    "object-curly-newline": "off"
+    "object-curly-newline": "off",
+    "react/button-has-type": "off"
   },
   "settings": {
     "import/resolver": {

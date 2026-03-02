@@ -1,4 +1,4 @@
-import GameStatus from "@/constants/gameStatus";
+import { GameStatus } from "@/constants/gameStatus";
 
 export { GameStatus };
 

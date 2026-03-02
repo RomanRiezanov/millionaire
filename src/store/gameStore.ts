@@ -1,12 +1,10 @@
 import { create } from "zustand";
 
 import gameConfig from "@/config/questions.json";
-import GameStatus from "@/constants/gameStatus";
+import { GameStatus } from "@/constants/gameStatus";
 import type { GameState } from "@/types";
 
 const TOTAL_QUESTIONS = gameConfig.questions.length;
-
-interface StoreState extends GameState {}
 
 const initialState = {
   currentQuestionIndex: 0,
@@ -14,7 +12,7 @@ const initialState = {
   earnedPrize: 0,
 };
 
-const useGameStore = create<StoreState>((set, get) => ({
+export const useGameStore = create<GameState>((set, get) => ({
   ...initialState,
 
   startGame: () => {
@@ -50,5 +48,3 @@ const useGameStore = create<StoreState>((set, get) => ({
     set(initialState);
   },
 }));
-
-export default useGameStore;

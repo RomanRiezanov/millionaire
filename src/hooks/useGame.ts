@@ -1,19 +1,20 @@
 import gameConfig from "@/config/questions.json";
-import useGameStore from "@/store/gameStore";
+import { GameStatus } from "@/constants/gameStatus";
+import { useGameStore } from "@/store/gameStore";
 import type { Question } from "@/types";
 
 interface UseGameReturn {
   currentQuestion: Question | null;
   currentQuestionIndex: number;
   totalQuestions: number;
-  gameStatus: string;
+  gameStatus: GameStatus;
   earnedPrize: number;
   startGame: () => void;
   answerQuestion: (answerId: string) => void;
   resetGame: () => void;
 }
 
-const useGame = (): UseGameReturn => {
+export const useGame = (): UseGameReturn => {
   const {
     currentQuestionIndex,
     gameStatus,
@@ -24,7 +25,7 @@ const useGame = (): UseGameReturn => {
   } = useGameStore();
 
   const currentQuestion =
-    gameStatus === "playing"
+    gameStatus === GameStatus.PLAYING
       ? gameConfig.questions[currentQuestionIndex] ?? null
       : null;
 
@@ -39,5 +40,3 @@ const useGame = (): UseGameReturn => {
     resetGame,
   };
 };
-
-export default useGame;

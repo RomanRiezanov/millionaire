@@ -1,6 +1,6 @@
 import classNames from "classnames";
 
-import AnswerShapeIcon from "@/assets/icons/AnswerShapeIcon";
+import { AnswerShapeIcon } from "@/assets/icons/AnswerShapeIcon";
 import { AnswerState } from "@/constants/answerState";
 import type { Answer } from "@/types";
 
@@ -13,7 +13,7 @@ interface AnswerOptionProps {
   disabled?: boolean;
 }
 
-function AnswerOption({
+export function AnswerOption({
   answer,
   state = AnswerState.IDLE,
   onClick,
@@ -35,5 +35,3 @@ function AnswerOption({
     </button>
   );
 }
-
-export default AnswerOption;

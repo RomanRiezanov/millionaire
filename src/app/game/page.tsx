@@ -3,14 +3,15 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import BurgerIcon from "@/assets/icons/BurgerIcon";
-import CloseIcon from "@/assets/icons/CloseIcon";
-import AnswerOption from "@/components/shared/AnswerOption/AnswerOption";
-import PrizeList from "@/components/shared/PrizeList/PrizeList";
+import { BurgerIcon } from "@/assets/icons/BurgerIcon";
+import { CloseIcon } from "@/assets/icons/CloseIcon";
+import { AnswerOption } from "@/components/shared/AnswerOption/AnswerOption";
+import { PrizeList } from "@/components/shared/PrizeList/PrizeList";
 import { AnswerState } from "@/constants/answerState";
-import GameStatus from "@/constants/gameStatus";
+import { GameStatus } from "@/constants/gameStatus";
 import { ROUTES } from "@/constants/routes";
-import useGame from "@/hooks/useGame";
+import { ANSWER_REVEAL_DELAY, NEXT_QUESTION_DELAY } from "@/constants/timings";
+import { useGame } from "@/hooks/useGame";
 
 import styles from "./page.module.scss";
 
@@ -58,12 +59,16 @@ export default function GamePage() {
 
       setTimeout(() => {
         answerQuestion(id);
-      }, 1000);
-    }, 1000);
+      }, NEXT_QUESTION_DELAY);
+    }, ANSWER_REVEAL_DELAY);
   };
 
   if (!currentQuestion || gameStatus !== GameStatus.PLAYING) {
-    return null;
+    return (
+      <main className={styles.container}>
+        <p className={styles.placeholder}>Redirecting...</p>
+      </main>
+    );
   }
 
   return (

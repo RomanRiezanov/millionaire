@@ -3,9 +3,9 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-import Button from "@/components/ui/Button/Button";
+import { Button } from "@/components/ui/Button/Button";
 import { ROUTES } from "@/constants/routes";
-import useGameStore from "@/store/gameStore";
+import { useGameStore } from "@/store/gameStore";
 
 import styles from "./page.module.scss";
 
